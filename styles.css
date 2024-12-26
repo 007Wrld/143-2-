@@ -1,0 +1,250 @@
+/* General page styles */
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure it's behind all content */
+    overflow: hidden; /* Prevent scrolling */
+}
+
+.background-giphy {
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Prevent interference with clicks */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Ensure the background stays behind the content */
+}
+
+/* Body and container */
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #b5e8b5, #8cd98c); /* Soft green gradient */
+    color: #3d3d3d;
+    overflow: hidden; /* Remove scrollbars */
+    box-sizing: border-box;
+}
+
+#heart-container {
+    position: relative;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px; /* Adjust gap between the images */
+    z-index: 5; /* Ensure images are below the heart */
+}
+
+/* Image Styling */
+#pic1, #pic2 {
+    width: auto;
+    height: auto;
+    max-width: 350px; /* Set a maximum width */
+    max-height: 350px; /* Set a maximum height */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+#pic1:hover, #pic2:hover {
+    transform: scale(1.05);
+}
+
+#pic1 {
+    background-color: #6fcf97;
+}
+
+#pic2 {
+    background-color: #ff6b81;
+}
+
+/* Heart element positioning - now centered and not touching the pics */
+#heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px; /* Increase size */
+    animation: beat 1s infinite alternate;
+    color: #a3e4b5;
+    cursor: pointer;
+    z-index: 10; /* Ensure it is above the images */
+}
+
+/* Text displayed when clicking */
+#click-text {
+    position: absolute;
+    top: 75%;
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#click-text.hidden {
+    opacity: 0;
+}
+
+#click-text:not(.hidden) {
+    opacity: 1;
+}
+
+@keyframes beat {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Popup Modals for Correct and Wrong Answers */
+#correct-popup, #popup-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+
+#correct-popup:not(.hidden), #popup-modal:not(.hidden) {
+    display: flex; /* Show when "hidden" class is removed */
+}
+
+/* Popup Content */
+.popup-content {
+    background-color: #f0f0f0;
+    border-radius: 15px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #77d88c;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #5ec77a;
+}
+
+#popup-modal iframe, #correct-popup iframe {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.giphy-embed {
+    pointer-events: none;
+    display: block;
+}
+
+/* Text for Correct and Wrong Answers */
+#wrong-text {
+    font-size: 30px;
+    font-weight: bold;
+    color: #ff4d4d;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+#correct-text {
+    font-size: 30px;
+    font-weight: bold;
+    color: #28a745; /* Green color */
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Continue Button */
+#continue-button {
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+#continue-button:hover {
+    background-color: #45a049;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    #heart-container {
+        flex-direction: column;
+    }
+
+    #pic1, #pic2 {
+        width: 90%;
+        height: auto;
+        max-width: 220px; /* Adjust the width for smaller screens */
+        max-height: 220px;
+    }
+
+    #click-text {
+        top: 90%;
+        font-size: 20px;
+    }
+
+    .popup-content {
+        width: 80%;
+    }
+
+    button {
+        padding: 8px 16px;
+    }
+}
