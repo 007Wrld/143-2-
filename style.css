@@ -2,47 +2,48 @@
 
 body {
   height: 100vh;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  /* Use the direct URL for the GIF as the background image */
   background-image: url("https://media.giphy.com/media/PTNIvNl2eTDbVFz7Uq/giphy.gif");
-  background-size: cover;  /* Ensures the GIF covers the full background */
-  background-position: center center;
-  background-attachment: fixed; /* Keeps the background fixed while scrolling */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .paper {
   background-image: url("https://i0.wp.com/textures.world/wp-content/uploads/2018/10/2-Millimeter-Paper-Background-copy.jpg?ssl=1");
-  background-size: 500px;
-  background-position: center center;
-  padding: 20px 100px;
-  /* min-width: 800px; */
-  transform: rotateZ(-5deg);
-  box-shadow: 1px 15px 20px 0px rgba(0,0,0,0.5);
+  background-size: cover;
+  padding: 20px;
+  box-shadow: 1px 15px 20px rgba(0, 0, 0, 0.5);
   position: absolute;
+  transform: rotate(-5deg);
 }
 
 .paper.heart {
-  position: relative;
   width: 200px;
   height: 200px;
   padding: 0;
   border-radius: 50%;
+  background-color: pink;
+  position: relative;
 }
 
 .paper.image {
   padding: 10px;
 }
 
-.paper.image p {
-  font-size: 30px;
+.paper.image img {
+  max-width: 100%;        /* Image will shrink to fit its container */
+  max-height: 300px;      /* Limits the maximum height */
+  min-height: 200px;      /* Ensures images don’t become too small */
+  object-fit: contain;    /* Maintains the aspect ratio of the image */
+  display: block;
+  user-select: none;
 }
 
 img {
-  max-height: 200px;
-  width: 100%;
   user-select: none;
 }
 
@@ -63,8 +64,22 @@ img {
 p {
   font-family: 'Zeyada';
   font-size: 50px;
-  color: rgb(0,0,100);
+  color: rgb(0, 0, 100);
   opacity: 0.75;
-  user-select: none;
-  /* filter: drop-shadow(2px 1.5px 1px rgba(0,0,105,0.9)); */
+}
+
+@media (max-width: 768px) {
+  p {
+    font-size: 20px;
+  }
+
+  .paper {
+    padding: 10px;
+    width: 80%;
+  }
+
+  .paper.image img {
+    max-height: 200px; /* Adjusts the image size for smaller screens */
+    min-height: 150px; /* Ensures images don't shrink too much */
+  }
 }
